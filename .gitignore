@@ -20,3 +20,4 @@ scripts
 notes
 /reports/
 .vscode/*
+project-configs/*

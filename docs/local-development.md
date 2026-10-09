@@ -104,7 +104,27 @@ MADOC_INSTALLATION_CODE='$2a$14$...your hash...'
 
 Keep the passphrase itself; you type it into the browser in step 7. `.env` is only read when the containers start, so if you change it later, run `docker compose up -d madoc-ts` to apply it.
 
-(`services/madoc-ts/install-code.cjs` does the same job, but it needs the native `bcrypt` package, which isn't installed.) `.env` is tracked in git. Leave this change out of your commits if you don't want it shared.
+(`services/madoc-ts/install-code.cjs` does the same job, but it needs the native `bcrypt` package, which isn't installed.)
+
+#### Keep your `.env` changes out of git
+
+`.env` is committed to the repository because the compose file needs its default settings, so Git keeps tracking it even though `.gitignore` lists it. `.gitignore` only applies to files Git isn't already tracking. Your new hash would otherwise show up in `git status` and could end up in a commit.
+
+Tell Git to ignore your local changes to it:
+
+```bash
+git update-index --skip-worktree .env
+```
+
+- **Run it once per clone.** It's a setting on your machine, not something that's committed, so anyone else who edits `.env` needs to run it too.
+- **Check it:** `git status` no longer lists `.env`, and `git ls-files -v .env` shows an `S` at the start of the line.
+- **Undo it** when you do want to commit a change to the defaults:
+
+  ```bash
+  git update-index --no-skip-worktree .env
+  ```
+
+- **When upstream changes `.env`,** a pull or merge stops with an error about `.env`. Undo the setting, move your copy aside, pull, then put your hash back and run the command again.
 
 ### 6. Start everything
 
