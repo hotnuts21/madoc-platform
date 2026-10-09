@@ -24,6 +24,8 @@ import { useProjectStatus } from '../hooks/use-project-status';
 import { useRelativeLinks } from '../hooks/use-relative-links';
 import { useRouteContext } from '../hooks/use-route-context';
 import { RedirectToNextCanvas } from '../features/canvas/RedirectToNextCanvas';
+import { FriendlyCanvasHeader } from '../features/friendly-editor/FriendlyCanvasHeader';
+import { useFriendlyEditor } from '../features/friendly-editor/use-friendly-editor';
 
 export const ViewCanvasModel: React.FC = () => {
   const { canvasId } = useRouteContext();
@@ -42,6 +44,7 @@ export const ViewCanvasModel: React.FC = () => {
   const hideThumbnailNavigationInFooter = hideCanvasThumbnailNavigation || project?.template === 'tabular-project';
 
   const { showCaptureModelOnManifest } = useProjectShadowConfiguration();
+  const isFriendly = useFriendlyEditor();
 
   const isReadOnly =
     (!canUserSubmit && !isLoadingTasks) ||
@@ -66,12 +69,12 @@ export const ViewCanvasModel: React.FC = () => {
 
   return (
     <AutoSlotLoader>
-      <Slot name="common-breadcrumbs">
+      <Slot name="common-breadcrumbs" hidden={isFriendly}>
         <DisplayBreadcrumbs />
       </Slot>
 
       <Slot id="canvas" name="canvas-model-header">
-        <CanvasPageHeader subRoute="model" />
+        {isFriendly ? <FriendlyCanvasHeader /> : <CanvasPageHeader subRoute="model" />}
       </Slot>
 
       {showPrepareMessage ? <PrepareCanvasCaptureModel /> : null}

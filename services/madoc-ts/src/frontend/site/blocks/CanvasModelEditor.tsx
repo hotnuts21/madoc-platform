@@ -8,6 +8,8 @@ import { useCanvasNavigation } from '../hooks/use-canvas-navigation';
 import { useProject } from '../hooks/use-project';
 import { useProjectStatus } from '../hooks/use-project-status';
 import { CanvasSimpleEditor } from '../features/canvas/CanvasSimpleEditor';
+import { FriendlyCanvasEditor } from '../features/friendly-editor/FriendlyCanvasEditor';
+import { useFriendlyEditor } from '../features/friendly-editor/use-friendly-editor';
 
 export const CanvasModelEditor: React.FC = () => {
   const { showCanvasNavigation } = useCanvasNavigation();
@@ -18,6 +20,7 @@ export const CanvasModelEditor: React.FC = () => {
   const CustomEditor = template?.components?.customEditor;
   const { isPreparing } = useProjectStatus();
   const [isSegmentation] = useLocalStorage('segmentation-prepare', false);
+  const isFriendly = useFriendlyEditor();
 
   if (!showCanvasNavigation || !user) {
     return null;
@@ -25,6 +28,10 @@ export const CanvasModelEditor: React.FC = () => {
 
   if (CustomEditor) {
     return <CustomEditor />;
+  }
+
+  if (isFriendly && !isPreparing) {
+    return <FriendlyCanvasEditor revision={revision} />;
   }
 
   return <CanvasSimpleEditor revision={revision} isSegmentation={isSegmentation && isPreparing} />;
