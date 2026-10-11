@@ -18,6 +18,8 @@ Each section stands on its own, so it can be copied into other documents.
 
 `nlw` is NLW's combined branch: Digirati's `main` plus every finished NLW feature. Each feature is developed on its own branch from `main`, then merged into `nlw` through a pull request. This document lives on `nlw`; feature branches add their own sections.
 
+Also on `nlw`: [contribution-settings-explained.md](contribution-settings-explained.md), which explains how the claim, review and completion settings combine.
+
 All features are **off by default**. Projects that don't switch them on behave exactly as before.
 
 ---
