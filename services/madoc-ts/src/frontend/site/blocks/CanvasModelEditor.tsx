@@ -8,6 +8,8 @@ import { useCanvasNavigation } from '../hooks/use-canvas-navigation';
 import { useProject } from '../hooks/use-project';
 import { useProjectStatus } from '../hooks/use-project-status';
 import { CanvasSimpleEditor } from '../features/canvas/CanvasSimpleEditor';
+import { FriendlyCanvasEditor } from '../features/friendly-editor/FriendlyCanvasEditor';
+import { useFriendlyEditor } from '../features/friendly-editor/use-friendly-editor';
 import { TrainingVideoContributionPrompt } from '../features/training-video/TrainingVideoContributionPrompt';
 
 export const CanvasModelEditor: React.FC = () => {
@@ -19,18 +21,24 @@ export const CanvasModelEditor: React.FC = () => {
   const CustomEditor = template?.components?.customEditor;
   const { isPreparing } = useProjectStatus();
   const [isSegmentation] = useLocalStorage('segmentation-prepare', false);
+  const isFriendly = useFriendlyEditor();
 
   if (!showCanvasNavigation || !user) {
     return null;
   }
 
+  let editor: React.ReactNode;
+  if (CustomEditor) {
+    editor = <CustomEditor />;
+  } else if (isFriendly && !isPreparing) {
+    editor = <FriendlyCanvasEditor revision={revision} />;
+  } else {
+    editor = <CanvasSimpleEditor revision={revision} isSegmentation={isSegmentation && isPreparing} />;
+  }
+
   return (
     <>
-      {CustomEditor ? (
-        <CustomEditor />
-      ) : (
-        <CanvasSimpleEditor revision={revision} isSegmentation={isSegmentation && isPreparing} />
-      )}
+      {editor}
       <TrainingVideoContributionPrompt />
     </>
   );

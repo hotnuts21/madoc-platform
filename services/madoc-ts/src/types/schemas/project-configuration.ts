@@ -99,6 +99,7 @@ export type ProjectConfiguration = TabularProjectConfigurationFields & {
     enableTooltipDescriptions?: boolean;
     enableSplitView?: boolean;
     enableEditorResizing?: boolean;
+    enableFriendlyEditor?: boolean;
   };
   projectPageOptions?: {
     hideStartContributing?: boolean;
@@ -257,6 +258,7 @@ export type ProjectConfigurationNEW = TabularProjectConfigurationFields & {
     enableTooltipDescriptions?: boolean;
     enableSplitView?: boolean;
     enableEditorResizing?: boolean;
+    enableFriendlyEditor?: boolean;
   };
   contributionWarningTime: false | number;
   shortExpiryTime?: string;

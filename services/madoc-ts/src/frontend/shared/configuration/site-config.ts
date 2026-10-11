@@ -14,6 +14,13 @@ const TYPESENSE_OPTIONS = [
   { label: 'Canvases', value: 'canvases' },
 ];
 
+const FRIENDLY_EDITOR_MODEL_OPTION = {
+  label: 'Use the friendly contributor layout',
+  description:
+    'A simplified contribution page for volunteers: a large image and task cards, without the metadata and document panels. Does not apply to tabular projects or transcription mode.',
+  value: 'enableFriendlyEditor',
+};
+
 const TABULAR_OVERLAY_COLOR_FIELDS = {
   tabularHeaderOverlayColor: {
     label: 'Canvas overlay color: header row',
@@ -380,6 +387,7 @@ export const siteConfigurationModel: {
         label: 'Enable resizable editor panels',
         value: 'enableEditorResizing',
       },
+      FRIENDLY_EDITOR_MODEL_OPTION,
     ],
   },
   reviewOptions: {
@@ -1043,6 +1051,7 @@ const genericContributionModelPageOptions = [
     value: 'enableSplitView',
   },
   ENABLE_EDITOR_RESIZING_MODEL_OPTION,
+  FRIENDLY_EDITOR_MODEL_OPTION,
 ];
 
 const tabularContributionModelPageOptions = [

@@ -9,12 +9,14 @@ Each section stands on its own, so it can be copied into other documents.
 
 ## Status
 
-| Feature or fix | Branch | Status |
-|---|---|---|
-| [Training video and contribution-page pop-up](#training-video-and-contribution-page-pop-up) | `feature/training-video` | Built and tested locally |
-| [Translations not saving](#translations-not-saving) | `fix/translations-json` | Fixed; offered to Digirati as a pull request |
-| [Friendly contributor layout](#friendly-contributor-layout) | `feature/friendly-editor` | Phase 1 built; flashing fix parked |
-| [Local development guide](#local-development-guide) | `feature/friendly-editor` | Done |
+| Feature or fix | Branch | In `nlw` | Status |
+|---|---|---|---|
+| [Training video and contribution-page pop-up](#training-video-and-contribution-page-pop-up) | `feature/training-video` | Yes | Built and tested locally |
+| [Translations not saving](#translations-not-saving) | `fix/translations-json` | Yes | Fixed; offered to Digirati as a pull request |
+| [Friendly contributor layout](#friendly-contributor-layout) | `feature/friendly-editor` | Yes | Phase 1 built; flashing fix parked |
+| [Local development guide](#local-development-guide) | `feature/friendly-editor` | Yes | Done |
+
+`nlw` is NLW's combined branch: Digirati's `main` plus every finished NLW feature. Each feature is developed on its own branch from `main`, then merged into `nlw` through a pull request. This document lives on `nlw`; feature branches add their own sections.
 
 All features are **off by default**. Projects that don't switch them on behave exactly as before.
 

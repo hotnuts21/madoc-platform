@@ -20,3 +20,7 @@ scripts
 notes
 /reports/
 .vscode/*
+project-configs/*
+
+# Local-only notes such as test logins. Never commit these.
+docs/local/

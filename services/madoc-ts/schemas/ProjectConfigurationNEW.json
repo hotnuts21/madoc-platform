@@ -376,6 +376,9 @@
                 },
                 "enableEditorResizing": {
                   "type": "boolean"
+                },
+                "enableFriendlyEditor": {
+                  "type": "boolean"
                 }
               }
             }
