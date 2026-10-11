@@ -22,6 +22,7 @@ Also on `nlw`:
 
 - [contribution-settings-explained.md](contribution-settings-explained.md): how the claim, review and completion settings combine.
 - [user-roles-explained.md](user-roles-explained.md): what each user role can do.
+- [contributor-journey.md](contributor-journey.md): every public page, what each person sees, and bugs with steps to reproduce.
 
 All features are **off by default**. Projects that don't switch them on behave exactly as before.
 
