@@ -42,6 +42,7 @@ import {
 import { PublicUserProfile, Site, SiteUser, UserInformationRequest } from '../extensions/site-manager/types';
 import { ProjectManifestTasks } from '../types/manifest-tasks';
 import { NoteListResponse } from '../types/personal-notes';
+import { TrainingVideoWatchedRequest, TrainingVideoWatchedResponse } from '../types/schemas/training-video';
 import { Pm2Status } from '../types/pm2';
 import { CreateProjectUpdate, ProjectFeedback, ProjectMember, ProjectUpdate } from '../types/projects';
 import { BullMqCancelSearchIndexResult, BullMqResumeQueueResult, BullMqSnapshot } from '../types/bullmq-status';
@@ -2835,6 +2836,17 @@ export class ApiClient {
 
   async getSettingsModel() {
     return this.request<{ model: CaptureModel }>(`/api/madoc/me/settings`);
+  }
+
+  async getTrainingVideoWatched() {
+    return this.request<TrainingVideoWatchedResponse>(`/api/madoc/me/training-video`);
+  }
+
+  async markTrainingVideoWatched(projectId: number) {
+    return this.request<TrainingVideoWatchedResponse>(`/api/madoc/me/training-video`, {
+      method: 'POST',
+      body: { projectId } as TrainingVideoWatchedRequest,
+    });
   }
 
   async getSiteTerms(selected?: string) {

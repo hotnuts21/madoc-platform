@@ -24,6 +24,8 @@ Follow the route's `createUniversalComponent` loader and server/client consumers
 - Under `/projects/:slug`, keep Typesense results, facet discovery, autocomplete, and result links in the same project context.
 - Manifest `/model` contributions compose their preview and editor in `ViewManifestModel`; keep its `HorizontalEditorSplit` behavior aligned with the canvas contribution editor.
 - Deep-merge nested site/project configuration to retain sibling options. Keep MJML and plain-text email content equivalent.
+- A new configuration option needs a default in `config.json` (`defaultSiteConfiguration`) as well as its field in `src/frontend/shared/configuration/site-config.ts`. The admin form hydrates without `keepExtraFields` (`EditorShorthandCaptureModel.tsx`), so a top-level option with no value is not rendered at all. Restart `server` after editing `config.json`.
+- Blocks listed in `src/extensions/page-blocks/default-definitions.ts` are imported by `src/gateway/api.ts`. They must not import `use-api-query` (`apiHooks`), which reads `ApiClient.prototype` on load; the circular import crash-loops the server bundle. Use `useApi()` with `useQuery` instead.
 - When invalidating queries after a frontend mutation, use `useQueryCache()` from the active provider, not the module-level `queryCache`. `src/frontend/shared/utility/render-client.tsx` installs `ReactQueryCacheProvider`; invalidating the global cache can leave `useData` results stale until reload.
 
 ## SSR and build integration

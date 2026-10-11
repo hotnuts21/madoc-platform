@@ -334,6 +334,7 @@ import { updatePassword } from './routes/user/update-password';
 import { updateProfilePage } from './routes/user/update-profile';
 import { userAutocomplete } from './routes/user/user-autocomplete';
 import { userSettingsModel } from './routes/user/user-settings-model';
+import { getTrainingVideoWatched, markTrainingVideoWatchedRoute } from './routes/user/training-video';
 import { TypedRouter } from './utility/typed-router';
 import { router as webhookRoutes } from './webhooks/router';
 
@@ -513,6 +514,13 @@ export const router = new TypedRouter({
   // User.
   'get-user-settings-model': [TypedRouter.GET, '/api/madoc/me/settings', userSettingsModel],
   'update-user-settings-model': [TypedRouter.POST, '/api/madoc/me/settings', saveUserSettings],
+  'get-training-video-watched': [TypedRouter.GET, '/api/madoc/me/training-video', getTrainingVideoWatched],
+  'mark-training-video-watched': [
+    TypedRouter.POST,
+    '/api/madoc/me/training-video',
+    markTrainingVideoWatchedRoute,
+    { schemaName: 'TrainingVideoWatchedRequest' },
+  ],
 
   // Badges
   'create-badge': [TypedRouter.POST, '/api/madoc/badges', createBadge],
@@ -681,11 +689,7 @@ export const router = new TypedRouter({
   'create-project': [TypedRouter.POST, '/api/madoc/projects', createNewProject],
   'list-projects': [TypedRouter.GET, '/api/madoc/projects', listProjects],
   'get-project': [TypedRouter.GET, '/api/madoc/projects/:id', getProject],
-  'get-project-search-indexes': [
-    TypedRouter.GET,
-    '/api/madoc/projects/:id/search-indexes',
-    listProjectSearchIndexes,
-  ],
+  'get-project-search-indexes': [TypedRouter.GET, '/api/madoc/projects/:id/search-indexes', listProjectSearchIndexes],
   'create-project-search-index': [
     TypedRouter.POST,
     '/api/madoc/projects/:id/search-indexes',
